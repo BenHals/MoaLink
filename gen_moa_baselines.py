@@ -109,7 +109,7 @@ class MoaOptions:
         self.concept_limit = concept_limit
         self.moa_directory = moa_directory
         self.using_linux = using_linux
-        self.3xperiment_directory = directory
+        self.experiment_directory = directory
         self.seed = None
         self.moa_learner = moa_learner
 
