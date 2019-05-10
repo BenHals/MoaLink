@@ -128,7 +128,7 @@ if __name__ == "__main__":
     ap.add_argument("-m", "--moa",
         help="Moa location", default=f"moa{os.sep}lib{os.sep}")
     ap.add_argument("-ml", "--moalearner",
-        help="Moa location", default=f"rcd", choices = ['ht', 'rcd'])
+        help="Moa location", default=f"rcd", choices = ['ht', 'rcd', 'arf', 'obag'])
     ap.add_argument("-l", "--linux", action="store_true",
         help="running on linux")
     args = vars(ap.parse_args())
