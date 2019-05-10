@@ -68,6 +68,7 @@ def start_run(options):
             options.moa_learner,
             options.concept_limit,
             'int',
+            num_examples,
             config.report_window_length,
             options.experiment_directory,
             is_bat= not options.using_linux
