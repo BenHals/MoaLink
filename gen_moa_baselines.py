@@ -78,7 +78,7 @@ def start_run(options):
     t_start = process_time()
     command = f"{bat_filename} {options.moa_location}"
     print(command)
-    if not options.is_bat:
+    if options.using_linux:
         
         subprocess.run(['chmod' ,'+x', bat_filename])
         subprocess.run([bat_filename, options.moa_location])
