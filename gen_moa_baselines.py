@@ -5,7 +5,7 @@ import argparse
 import random
 import pickle
 
-import moaLink.moaLink
+import moaLink
 import config
 import subprocess
 
@@ -93,7 +93,7 @@ def start_run(options):
     # display.results.stitch_csv(options.experiment_directory, name)
 
 def subdir_run(options):
-    base_directory = options.directory
+    base_directory = options.experiment_directory
     list_of_directories = []
     for (dirpath, dirnames, filenames) in os.walk(base_directory):
         for filename in filenames:
