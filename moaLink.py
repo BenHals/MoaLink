@@ -21,7 +21,7 @@ def get_learner_string(learner, concept_limit):
     return f'({learner_string} {concept_string})'
 
 def make_moa_command(stream_string, learner, concept_limit, evaluator, length, report_length, directory, is_bat = True):
-    return f'java -cp {"%" if is_bat else "$"}1\moa.jar -javaagent:{"%" if is_bat else "$"}1\sizeofag-1.0.4.jar moa.DoTask "{MOA_EVALUATORS[evaluator]} -l {get_learner_string(learner, concept_limit)} -s {stream_string} -e (BenPerformanceEvaluator -w {report_length})-i {length} -f {50}" > "{directory}{os.sep}{learner}{os.sep}{concept_limit}.csv"'
+    return f'java -cp {"%" if is_bat else "$"}1\moa.jar -javaagent:{"%" if is_bat else "$"}1\sizeofag-1.0.4.jar moa.DoTask "{MOA_EVALUATORS[evaluator]} -l {get_learner_string(learner, concept_limit)} -s {stream_string} -e (BenPerformanceEvaluator -w {report_length})-i {length} -f {50}" > "{directory}{os.sep}{learner}-{concept_limit}.csv"'
 
 def get_moa_stream_from_file(directory, is_bat = True):
     return f"(ArffFileStream -f ({'%' if is_bat else '$'}cd{'%' if is_bat else '$'}\saved_stream.ARFF))"
