@@ -20,7 +20,7 @@ def get_learner_string(learner, concept_limit):
     if learner == 'ht':
         concept__string = ""
     else:
-        concept_string = f"c -{concept_limit}" if concept_limit > 0 else f""
+        concept_string = f"-c {concept_limit}" if concept_limit > 0 else f""
     
     return f'({learner_string} {concept_string})'
 
