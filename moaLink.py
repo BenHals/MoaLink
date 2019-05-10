@@ -13,8 +13,8 @@ MOA_BASELINES = {
 
 MOA_LEARNERS = {
     'rcd': 'meta.RCD',
-    'arf': 'meta.AdaptiveRandomForest'
-    'obag': 'meta.OzaBagAdwin'
+    'arf': 'meta.AdaptiveRandomForest',
+    'obag': 'meta.OzaBagAdwin',
     'ht': 'trees.HoeffdingTree'
 }
 def get_learner_string(learner, concept_limit):
