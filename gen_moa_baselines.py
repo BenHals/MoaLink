@@ -62,8 +62,8 @@ def start_run(options):
         print(concept_chain)
         concepts = sorted(list(concept_chain.keys()))
         num_examples = concepts[-1] + (concepts[-1] - concepts[-2])
-        stream_string = moaLink.moaLink.get_moa_stream_from_filename(os.sep.join(datastream_filename.split(os.sep)[:-1]), datastream_filename.split(os.sep)[-1])
-        moa_string = moaLink.moaLink.make_moa_command(
+        stream_string = moaLink.get_moa_stream_from_filename(os.sep.join(datastream_filename.split(os.sep)[:-1]), datastream_filename.split(os.sep)[-1])
+        moa_string = moaLink.make_moa_command(
             stream_string,
             options.moa_learner,
             options.concept_limit,
@@ -72,7 +72,7 @@ def start_run(options):
             options.experiment_directory,
             is_bat= not options.using_linux
         )
-        moaLink.moaLink.save_moa_bat(moa_string, bat_filename, not options.using_linux)
+        moaLink.save_moa_bat(moa_string, bat_filename, not options.using_linux)
         # datastream = None
     t_start = process_time()
     command = f"{bat_filename} {options.moa_location}"
