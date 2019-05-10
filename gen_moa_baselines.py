@@ -106,9 +106,9 @@ def subdir_run(options):
         start_run(options)
 
 class MoaOptions:
-    def __init__(self, concept_limit, moa_directory, using_linux, directory, moa_learner):
+    def __init__(self, concept_limit, moa_location, using_linux, directory, moa_learner):
         self.concept_limit = concept_limit
-        self.moa_directory = moa_directory
+        self.moa_location = moa_location
         self.using_linux = using_linux
         self.experiment_directory = directory
         self.seed = None
