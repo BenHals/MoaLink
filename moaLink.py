@@ -17,7 +17,11 @@ MOA_LEARNERS = {
 }
 def get_learner_string(learner, concept_limit):
     learner_string = MOA_LEARNERS[learner]
-    concept_string = f"c -{concept_limit}" if concept_limit > 0 else f""
+    if learner == 'ht':
+        concept__string = ""
+    else:
+        concept_string = f"c -{concept_limit}" if concept_limit > 0 else f""
+    
     return f'({learner_string} {concept_string})'
 
 def make_moa_command(stream_string, learner, concept_limit, evaluator, length, report_length, directory, is_bat = True):

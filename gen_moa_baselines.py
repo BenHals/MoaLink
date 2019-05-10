@@ -126,7 +126,7 @@ if __name__ == "__main__":
     ap.add_argument("-d", "--directory",
         help="tdata generator for stream", default="datastreams")
     ap.add_argument("-m", "--moa",
-        help="Moa location", default=f"moa{os.sep}lib")
+        help="Moa location", default=f"moa{os.sep}lib{os.sep}")
     ap.add_argument("-ml", "--moalearner",
         help="Moa location", default=f"rcd", choices = ['ht', 'rcd'])
     ap.add_argument("-l", "--linux", action="store_true",
