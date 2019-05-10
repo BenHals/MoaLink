@@ -13,11 +13,13 @@ MOA_BASELINES = {
 
 MOA_LEARNERS = {
     'rcd': 'meta.RCD',
+    'arf': 'meta.AdaptiveRandomForest'
+    'obag': 'meta.OzaBagAdwin'
     'ht': 'trees.HoeffdingTree'
 }
 def get_learner_string(learner, concept_limit):
     learner_string = MOA_LEARNERS[learner]
-    if learner == 'ht':
+    if learner != 'rcd':
         concept_string = ""
     else:
         concept_string = f"-c {concept_limit}" if concept_limit > 0 else f""
