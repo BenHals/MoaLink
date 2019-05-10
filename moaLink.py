@@ -18,7 +18,7 @@ MOA_LEARNERS = {
 def get_learner_string(learner, concept_limit):
     learner_string = MOA_LEARNERS[learner]
     if learner == 'ht':
-        concept__string = ""
+        concept_string = ""
     else:
         concept_string = f"-c {concept_limit}" if concept_limit > 0 else f""
     
