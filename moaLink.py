@@ -19,7 +19,7 @@ MOA_LEARNERS = {
 }
 def get_learner_string(learner, concept_limit):
     learner_string = MOA_LEARNERS[learner]
-
+    print(learner)
     if learner == 'rcd':
         if concept_limit != 0:
             concept_limit = max(0, concept_limit)
