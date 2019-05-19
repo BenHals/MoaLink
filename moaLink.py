@@ -30,7 +30,7 @@ def get_learner_string(learner, concept_limit):
         concept_string = f"-s {concept_limit}" if concept_limit != None else f""
     else:
         concept_string = ""
-    
+    print(f'{learner_string} {concept_string}')
     return f'({learner_string} {concept_string})'
 
 def make_moa_command(stream_string, learner, concept_limit, evaluator, length, report_length, directory, is_bat = True):
