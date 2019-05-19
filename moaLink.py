@@ -19,12 +19,17 @@ MOA_LEARNERS = {
 }
 def get_learner_string(learner, concept_limit):
     learner_string = MOA_LEARNERS[learner]
-    if learner != 'rcd':
-        concept_string = ""
-    else:
+
+    if learner == 'rcd':
         if concept_limit != 0:
             concept_limit = max(0, concept_limit)
         concept_string = f"-c {concept_limit}" if concept_limit != None else f""
+    elif learner == 'arf':
+        if concept_limit != 0:
+            concept_limit = max(1, concept_limit)
+        concept_string = f"-s {concept_limit}" if concept_limit != None else f""
+    else:
+        concept_string = ""
     
     return f'({learner_string} {concept_string})'
 
