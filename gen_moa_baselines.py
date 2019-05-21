@@ -143,7 +143,7 @@ if __name__ == "__main__":
     options.seed = seed
 
     if args['conceptlimitrange'] > 0:
-        for cl in range(0, args['conceptlimitrange'], max(args['conceptlimit'], 1)):
+        for cl in range(1, args['conceptlimitrange'], max(args['conceptlimit'], 1)):
             options.concept_limit = cl
             subdir_run(options)
     else:
