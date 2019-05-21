@@ -123,6 +123,8 @@ if __name__ == "__main__":
         help="Noise", default=0)
     ap.add_argument("-cl", "--conceptlimit", type=int,
         help="Concept limit", default=-1)
+    ap.add_argument("-clr", "--conceptlimitrange", type=int,
+        help="Concept limit", default=-1)
     ap.add_argument("-d", "--directory",
         help="tdata generator for stream", default="datastreams")
     ap.add_argument("-m", "--moa",
@@ -140,5 +142,11 @@ if __name__ == "__main__":
         args['seed'] = seed
     options.seed = seed
 
-    subdir_run(options)
+    if args['conceptlimitrange'] > 0:
+        for cl in range(0, args['conceptlimitrange'], max(args['conceptlimit'], 1)):
+            options.concept_limit = cl
+            subdir_run(options)
+    else:
+        subdir_run(options)
+
 
