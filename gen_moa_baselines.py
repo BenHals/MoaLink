@@ -24,6 +24,7 @@ def start_run(options):
         print('No Directory')
         return
     name = '-'.join([options.moa_learner, str(options.concept_limit)])
+    print(name)
     datastream_filename = None
     datastream_pickle_filename = None
     fns = glob.glob(os.sep.join([options.experiment_directory, "*.ARFF"]))
@@ -38,6 +39,7 @@ def start_run(options):
             pickle_full_fn = os.sep.join([fn_path, pickle_fn])
             csv_fn = f"{name}.csv"
             csv_full_fn = os.sep.join([fn_path, csv_fn])
+            print(csv_full_fn)
             if os.path.exists(pickle_full_fn):
                 skip_file = False
                 if os.path.exists(csv_full_fn):
