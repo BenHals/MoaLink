@@ -103,7 +103,12 @@ def subdir_run(options):
     list_of_directories.sort(reverse = True)
     for subdir in list_of_directories:
         options.experiment_directory = subdir
-        start_run(options)
+        if options.concept_limit_range > 0:
+            for cl in range(0, options.experiment_directory, 1):
+                options.concept_limit = cl
+                start_run(options)
+        else:
+            start_run(options)
 
 class MoaOptions:
     def __init__(self, concept_limit, moa_location, using_linux, directory, moa_learner):
@@ -135,25 +140,14 @@ if __name__ == "__main__":
         help="running on linux")
     args = vars(ap.parse_args())
     options = MoaOptions(args['conceptlimit'], args['moa'], args['linux'], args['directory'], args['moalearner'])
-
+    options.concept_limit_range = args['conceptlimitrange']
     seed = args['seed']
     if seed == None:
         seed = random.randint(0, 10000)
         args['seed'] = seed
     options.seed = seed
 
-    if args['conceptlimitrange'] > 0:
-        for cl in range(1, args['conceptlimitrange'], max(args['conceptlimit'], 1)):
-            options = MoaOptions(args['conceptlimit'], args['moa'], args['linux'], args['directory'], args['moalearner'])
 
-            seed = args['seed']
-            if seed == None:
-                seed = random.randint(0, 10000)
-                args['seed'] = seed
-            options.seed = seed
-            options.concept_limit = cl
-            subdir_run(options)
-    else:
-        subdir_run(options)
+    subdir_run(options)
 
 
