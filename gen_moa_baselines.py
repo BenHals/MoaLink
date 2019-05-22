@@ -144,6 +144,13 @@ if __name__ == "__main__":
 
     if args['conceptlimitrange'] > 0:
         for cl in range(1, args['conceptlimitrange'], max(args['conceptlimit'], 1)):
+            options = MoaOptions(args['conceptlimit'], args['moa'], args['linux'], args['directory'], args['moalearner'])
+
+            seed = args['seed']
+            if seed == None:
+                seed = random.randint(0, 10000)
+                args['seed'] = seed
+            options.seed = seed
             options.concept_limit = cl
             subdir_run(options)
     else:
