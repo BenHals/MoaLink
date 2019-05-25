@@ -103,10 +103,11 @@ def subdir_run(options):
             if filename.endswith('.ARFF'): 
                 list_of_directories.append(dirpath)
     list_of_directories.sort(reverse = True)
+    concept_limit_step = options.concept_limit
     for subdir in list_of_directories:
         options.experiment_directory = subdir
         if options.concept_limit_range > 0:
-            for cl in range(1, int(options.concept_limit_range), max(options.concept_limit, 1)):
+            for cl in range(1, int(options.concept_limit_range), max(options.concept_limit_step, 1)):
                 options.concept_limit = cl
                 start_run(options)
         else:
