@@ -107,7 +107,7 @@ def subdir_run(options):
     for subdir in list_of_directories:
         options.experiment_directory = subdir
         if options.concept_limit_range > 0:
-            for cl in range(1, int(options.concept_limit_range), max(options.concept_limit_step, 1)):
+            for cl in range(1, int(options.concept_limit_range), max(concept_limit_step, 1)):
                 options.concept_limit = cl
                 start_run(options)
         else:
