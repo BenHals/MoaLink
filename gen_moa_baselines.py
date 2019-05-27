@@ -97,12 +97,13 @@ def start_run(options):
         datastream_filename = f"{os.sep.join(datastream_filename.split(os.sep)[:-1])}{os.sep}{datastream_filename.split(os.sep)[-1]}"
         data = arff.loadarff(datastream_filename)
         df = pd.DataFrame(data[0])
+        df = df.apply(pd.to_numeric)
         df["y0"] = df["y0"].astype('category')
         datastream = DataStream(df)
         datastream.prepare_for_use()
 
         print(datastream.target_values)
-        learner = AdaptiveRandomForest(n_estimators= options.concept_limit)
+        learner = AdaptiveRandomForest(n_estimators= int(options.concept_limit))
         right = 0
         wrong = 0
         overall_log = []
