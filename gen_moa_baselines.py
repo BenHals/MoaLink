@@ -11,8 +11,13 @@ import subprocess
 
 
 import numpy as np
+import pandas as pd
 
 from time import process_time
+from skmultiflow.evaluation import EvaluatePrequential
+from scipy.io import arff
+from skmultiflow.data import DataStream
+from skmultiflow.meta.adaptive_random_forests import AdaptiveRandomForest
 
 
 
@@ -23,7 +28,7 @@ def start_run(options):
     if not os.path.exists(options.experiment_directory):
         print('No Directory')
         return
-    name = '-'.join([options.moa_learner, str(options.concept_limit)])
+    name = '-'.join([options.moa_learner, str(options.concept_limit), 'py'])
     print(name)
     datastream_filename = None
     datastream_pickle_filename = None
@@ -80,12 +85,43 @@ def start_run(options):
     t_start = process_time()
     command = f"{bat_filename} {options.moa_location}"
     print(command)
-    if options.using_linux:
-        
-        subprocess.run(['chmod' ,'+x', bat_filename])
-        subprocess.run([bat_filename, options.moa_location])
+    print(options.moa_learner)
+    if options.moa_learner != 'arf':
+        if options.using_linux:
+            
+            subprocess.run(['chmod' ,'+x', bat_filename])
+            subprocess.run([bat_filename, options.moa_location])
+        else:
+            subprocess.run(command)
     else:
-        subprocess.run(command)
+        datastream_filename = f"{os.sep.join(datastream_filename.split(os.sep)[:-1])}{os.sep}{datastream_filename.split(os.sep)[-1]}"
+        data = arff.loadarff(datastream_filename)
+        df = pd.DataFrame(data[0])
+        df["y0"] = df["y0"].astype('int')
+        datastream = DataStream(df)
+        datastream.prepare_for_use()
+
+        print(datastream.target_values)
+        learner = AdaptiveRandomForest(n_estimators= options.concept_limit)
+        right = 0
+        wrong = 0
+        overall_log = []
+        while datastream.has_more_samples():
+            X,y = datastream.next_sample()
+            prediction = learner.predict(X)
+            is_correct = prediction[0] == y[0]
+            if is_correct:
+                right += 1
+            else:
+                wrong += 1
+            learner.partial_fit(X, y)
+            if (right + wrong) > 0 and (right + wrong) % 200 == 0:
+                overall_log.append((right+ wrong, right / (right + wrong)))
+                print(f'ex: {right + wrong}, Acc: {right / (right + wrong)}\r', end = "")
+        overall = pd.DataFrame(overall_log, columns = ['ex', 'overall_accuracy'])
+        overall.to_csv(f"{options.experiment_directory}{os.sep}{name}.csv")
+        print("")
+        print(f'Accuracy: {right / (right + wrong)}')
     #fsm, system_stats, concept_chain, ds, stream_examples =  fsmsys.run_fsm(datastream, options, suppress = True, name = name, save_checkpoint=True)
     t_stop = process_time()
     print("")
