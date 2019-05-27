@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
 	
 RUN pip3 install numpy
 RUN pip3 install pandas
+RUN pip3 install scikit-multiflow
 
 COPY . MoaLink/
 
