@@ -96,9 +96,10 @@ def start_run(options):
     else:
         datastream_filename = f"{os.sep.join(datastream_filename.split(os.sep)[:-1])}{os.sep}{datastream_filename.split(os.sep)[-1]}"
         data = arff.loadarff(datastream_filename)
-        df = pd.DataFrame(data[0])
-        df = df.apply(pd.to_numeric)
-        df["y0"] = df["y0"].astype('category')
+        df = pd.DataFrame(data[0], dtype='float64')
+        df['y0'] = df['y0'].astype('int64')
+        # df["y0"] = df["y0"].astype('category')
+        print(df.info())
         datastream = DataStream(df)
         datastream.prepare_for_use()
 
