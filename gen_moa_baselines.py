@@ -18,7 +18,12 @@ from skmultiflow.evaluation import EvaluatePrequential
 from scipy.io import arff
 from skmultiflow.data import DataStream
 from skmultiflow.meta.adaptive_random_forests import AdaptiveRandomForest
+from skmultiflow.meta.adaptive_random_forests import ARFBaseLearner
 
+def get_votes_for_instance(self, X):
+    return self.classifier.get_votes_for_instance(X).copy()
+
+ARFBaseLearner.get_votes_for_instance = get_votes_for_instance
 
 
 
